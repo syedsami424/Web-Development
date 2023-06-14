@@ -1,0 +1,228 @@
+:root {
+	--blue: #2078d0;
+	--darker: #1F2937;
+	--light: #EEE;
+	--green: #056362;
+	--temp: #181c24;
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+header {
+	padding: 2rem 1rem;
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+header h1{ 
+	font-family: 'Courier New', Courier, monospace;
+	font-weight:600;
+	/* font-family: "Source Code Pro", monospace;  */
+	text-decoration-line: underline;
+	text-decoration-style: solid;
+	font-size: 2.5rem;
+	font-weight: 300;
+	color: black;
+	margin-bottom: 1rem;
+}
+
+#new-task-form {
+	display: flex;
+}
+
+input, button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}  
+
+#new-task-input {
+	flex: 1 1 0%;
+	/* background-color: black; */
+	background-color: rgb(145, 144, 144);
+	/* opacity: 0.8; */
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	font-family: "Source Code Pro", monospace;
+	color: black;
+	font-size: 1.25rem;
+    vertical-align: middle;
+}
+#new-task-input::placeholder {
+	color: black;
+}
+
+#new-task-submit {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: black;
+	cursor: pointer;
+	transition: 0.4s;
+
+	/* background-image: url("https://cdn.discordapp.com/attachments/1006294005480440009/1118168745278451793/rocket_1f680resize.png");
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;            
+    cursor: pointer;        
+    height: 16px;           
+    padding-left: 16px;    
+    vertical-align: middle; */
+	/* color: var(--pink);
+	font-size: 1.25rem;
+	font-weight: 700;
+	width: 50px;
+
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: 0.4s; */
+}
+
+#new-task-submit:hover {
+	opacity: 0.6;
+}
+
+#new-task-submit:active {
+	opacity: 0.6;
+}
+
+#empty-button {
+	/* background-image: url("https://cdn.discordapp.com/attachments/1006294005480440009/1118171620612247583/wastebasket_1f5d1-fe0fresize.png");
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;            
+    cursor: pointer;        
+    height: 16px;           
+    padding-left: 16px;    
+    vertical-align: middle; */
+	font-family:'Courier New', Courier, monospace;
+	font-weight: 600;
+	font-size: 1.25rem;
+	cursor: pointer;
+	transition: 0.4s;
+
+}
+#empty-button:hover {
+	opacity: 0.6;
+}
+
+#empty-button:active {
+	opacity: 0.6;
+}
+
+main {
+	flex: 1 1 0%;
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.task-list {
+	padding: 1rem;
+	vertical-align: middle;
+}
+
+.task-list h2 {
+	font-size: 1.5rem;
+	font-weight: 300;
+	font-family: 'Courier New', Courier, monospace;
+	text-decoration: underline;
+	font-weight: 600;
+	/* font-family: "Source Code Pro", monospace; */
+	color:black;
+	margin-bottom: 1rem;
+}
+#tasks .task {
+	display: flex;
+	/* color: white; */
+	justify-content: space-between;
+	background-color: rgb(155, 153, 153);
+	/* opacity: 0.6; */
+	padding: 1rem;
+	height: 60px;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+}
+
+.task .content {
+	flex: 1 1 0%;
+}
+
+.task .content .text {
+	font-family: "Source Code Pro", monospace;
+	/* color: white; */
+	color: black;
+	font-size: 1.125rem;
+	width: 100%;
+	display: block;
+	transition: 0.4s;
+}
+
+.task .content .text:not(:read-only) {
+	/* font-family: "Source Code Pro", monospace; */
+	color: white;
+}
+
+.task .actions {
+	display: flex;
+	margin: 0 -0.5rem;
+}
+
+.task .actions button {
+	transition: 0.4s;
+	cursor: pointer;
+	margin: 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: 0.4s;
+}
+
+.task .actions button:hover {
+	opacity: 0.8;
+}
+
+.task .actions button:active {
+	opacity: 0.6;
+}
+
+.task .actions .edit {
+	transition: 0.4s;
+	font-family: 'Courier New', Courier, monospace;
+	color: black;
+}
+
+.task .actions .delete {
+	transition: 0.4s;
+	font-family: 'Courier New', Courier, monospace;
+	color: black;
+	/* height: 30px;
+	width: 30px;
+	background-image: url("https://cdn.discordapp.com/attachments/1006294005480440009/1118218406857031710/no-entry-sign_1f6abresize.png");
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;                    
+    height: 16px;           
+    padding-left: 16px;    
+	color: var(--temp);  */
+}
+
+.task .actions .mark {
+	transition: 0.4s;
+	font-family: 'Courier New', Courier, monospace;
+	color: black;
+}
+
+body {
+    background-image: url('https://wallpaperaccess.com/full/2578765.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #FFFFFF;
+}
