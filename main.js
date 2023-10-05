@@ -1,78 +1,72 @@
-window.addEventListener('load', () => {
-	const form = document.querySelector("#new-task-form");
-	const input = document.querySelector("#new-task-input");
-	const list_el = document.querySelector("#tasks");
+//Server-side code:-
+const express=require('express');
+const axios=require('axios');
+const path=require('path');
+const bodyParser = require('body-parser');
+// import('node-fetch').then(({ default: fetch }) => {
+// });
 
-	form.addEventListener('submit', (e) => {
-		e.preventDefault();
+const app=express();  //creating an express application (instance of express)
+app.use(bodyParser.json());
+const port=5500;
 
-		const task = input.value;
-		const task_el = document.createElement('div');
-		task_el.classList.add('task');
-		const content = document.createElement('div');
-		content.classList.add('content');
-		task_el.appendChild(content);
-		const Input = document.createElement('input');
-		Input.classList.add('text');
-		Input.type = 'text';
-		Input.value = task;
-		Input.setAttribute('readonly', 'readonly');
-
-		content.appendChild(Input);
-
-		const Actions = document.createElement('div');
-		Actions.classList.add('actions');
-		
-		const EditButton = document.createElement('button');
-		EditButton.classList.add('edit');
-		EditButton.innerText = 'Edit';
-
-		const DelButton = document.createElement('button');
-		DelButton.classList.add('delete');
-		DelButton.innerText = 'Delete';
-
-        const MarkButton = document.createElement('button');
-        MarkButton.classList.add('mark');
-        MarkButton.innerText = 'Mark';
-
-		const EmptyButton=document.getElementById('empty-button');
-
-		Actions.appendChild(EditButton);
-		Actions.appendChild(DelButton);
-        Actions.appendChild(MarkButton);
-		task_el.appendChild(Actions);
-		list_el.appendChild(task_el);
-
-		EditButton.addEventListener('click', (e) => {
-			if (EditButton.innerText.toLowerCase()=="edit") {
-				EditButton.innerText = "Save";
-				Input.removeAttribute("readonly");
-				Input.focus();
-			} 
-			else{
-				EditButton.innerText="Edit";
-				Input.setAttribute("readonly", "readonly");
-			}
-		});
-
-		DelButton.addEventListener('click', (e) => {
-			list_el.removeChild(task_el);
-		});
-
-        MarkButton.addEventListener('click', (e) => {
-			if(MarkButton.innerText.toLowerCase()=="mark"){
-				MarkButton.innerText="Unmark";
-				Input.style.textDecoration="line-through";
-			}
-			else{
-				Input.style.textDecoration="none";
-				MarkButton.innerText="Mark";
-			}
-
-        });
-
-		EmptyButton.addEventListener('click', (e) => {
-			list_el.innerHTML="";
-		});
-	});
+app.get('/home' ,async(req,res)=>{
+    res.sendFile(path.join(__dirname+'/index.html'));
 });
+
+
+app.get('/getWeather', async(req,res)=>{ 
+    try{
+        const lon = req.query.lon;
+        const lat = req.query.lat;
+        console.log(lon);
+        console.log(lat);
+        // let lon=7.447;
+        // let lat=46.948;
+        // let product="civil";
+        const apiURL= `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civil&output=json`;
+
+        const response = await axios.get(apiURL);  //API call
+        const weatherData=response.data;  
+
+        let responseData={
+            weatherData: weatherData,
+            longitude: lon,
+            latitude: lat
+        }
+        
+        res.setHeader('Access-Control-Allow-Origin','*');
+        console.log(weatherData);
+        res.json(responseData);  //send data from server to client.
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({error: "Internal server error :("});
+    }
+});
+
+//activate server
+app.listen(port,()=>{
+    console.log(`Server is up and running on port ${port}`);
+})
+
+
+
+/*app.get('/getimage',async(req,res)=>{
+    try{
+        lon=7.447;
+        lat=46.948;
+        const imgURL= `http://www.7timer.info/bin/astro.php?lon=${lon}&lat=${lat}&ac=0&lang=en&unit=metric&output=internal&tzshift=0`;
+
+        const img_response= await axios.get(imgURL);
+        const img_data=img_response.data;
+
+        res.setHeader('Access-Control-Allow-Origin','*');
+        // console.log(img_data);
+        res.send(img_data);
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({error: "Internal server error :("});
+    }
+});*/
